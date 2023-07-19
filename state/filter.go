@@ -96,6 +96,7 @@ var resourcesNotSupportedInAzure = []string{
 
 var resourcesNotNeedingMovement = []string{
 	"azurerm_storage_share_file", // lacks any reference to subscription/resource group and is a child resource, so no need to convert and/or move
+	"azurerm_storage_blob",    
 }
 
 func (tfstate TerraformState) Filter(resourceFilter, moduleFilter, resourceGroupFilter, sourceSubscriptionID, targetResourceGroup, targetSubscriptionID string) (resourceInstances ResourcesInstanceSummary, sourceResourceGroup string, err error) {
