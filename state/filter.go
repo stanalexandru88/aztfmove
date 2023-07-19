@@ -50,7 +50,11 @@ func (ris ResourcesInstanceSummary) MovableOnAzure() []string {
 	var IDs []string
 	for _, r := range ris {
 		if !contains(resourcesNotSupportedInAzure, r.Type) && !contains(resourcesOnlyMovedInTF, r.Type) && !contains(resourcesBlockingMovement, r.Type) && !contains(resourcesNotNeedingMovement, r.Type) {
-			IDs = append(IDs, r.AzureID)
+
+			if !contains(IDs, r.AzureID) && !strings.HasPrefix(r.AzureID, "https://") {
+				IDs = append(IDs, r.AzureID)
+		}
+
 		}
 	}
 	return IDs
